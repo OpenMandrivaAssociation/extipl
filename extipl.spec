@@ -1,6 +1,6 @@
 %define	name	extipl
 %define	version	5.04
-%define release	%mkrel 7
+%define release	%mkrel 8
 
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		%{name}
@@ -8,7 +8,7 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://www.tsden.org/ryutaroh/extipl/extipl.html
 Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
-License:	GPL
+License:	GPL+
 Group:		System/Kernel and hardware
 BuildRequires:	nasm
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -61,5 +61,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_sbindir}/*
 %{_libdir}/%{name}
 %{_mandir}/*/*
-
 
