@@ -1,6 +1,6 @@
 %define	name	extipl
 %define	version	5.04
-%define release	%mkrel 8
+%define release	%mkrel 9
 
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		%{name}
