@@ -11,7 +11,6 @@ Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
 License:	GPL+
 Group:		System/Kernel and hardware
 BuildRequires:	nasm
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Exclusivearch:	%{ix86}
 Patch1:		extipl-5.03-fix-manpage.patch
 # Fix a nasm syntax error - 'crc32' is now a keyword in nasm
