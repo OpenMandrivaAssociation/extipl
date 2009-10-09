@@ -1,6 +1,6 @@
 %define	name	extipl
 %define	version	5.04
-%define release	%mkrel 13
+%define release	%mkrel 14
 
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		%{name}
@@ -56,8 +56,8 @@ rm -rf $RPM_BUILD_ROOT
 
 install src/%{name} -D $RPM_BUILD_ROOT%{_sbindir}/%{name}
 
-install -d $RPM_BUILD_ROOT%{_libdir}/%{name}
-install -m 644 src/{pollux,castor,altair,aldebaran}.bin $RPM_BUILD_ROOT%{_libdir}/%{name}
+install -d $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
+install -m 644 src/{pollux,castor,altair,aldebaran}.bin $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
 
 install -D -m 644 src/extipl.8.in $RPM_BUILD_ROOT%{_mandir}/man8/extipl.8
 
@@ -69,6 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc uninstall_linux_or_grub.txt doc/English/*
 %{_sbindir}/*
-%{_libdir}/%{name}
+%{_prefix}/lib/%{name}
 %{_mandir}/*/*
 
