@@ -52,18 +52,18 @@ EOF
 %make -C src
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-install src/%{name} -D $RPM_BUILD_ROOT%{_sbindir}/%{name}
+install src/%{name} -D %{buildroot}%{_sbindir}/%{name}
 
-install -d $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
-install -m 644 src/{pollux,castor,altair,aldebaran}.bin $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
+install -d %{buildroot}%{_prefix}/lib/%{name}
+install -m 644 src/{pollux,castor,altair,aldebaran}.bin %{buildroot}%{_prefix}/lib/%{name}
 
-install -D -m 644 src/extipl.8.in $RPM_BUILD_ROOT%{_mandir}/man8/extipl.8
+install -D -m 644 src/extipl.8.in %{buildroot}%{_mandir}/man8/extipl.8
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
