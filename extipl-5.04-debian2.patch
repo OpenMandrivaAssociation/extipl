@@ -1,0 +1,95 @@
+diff -urN extipl-5.04/src/extipl.c ./src/extipl.c
+--- extipl-5.04/src/extipl.c	2006-11-06 17:55:17.000000000 +0000
++++ ./src/extipl.c	2006-11-06 17:55:12.000000000 +0000
+@@ -22,9 +22,6 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <regex.h>
+-#ifdef __linux__
+-#include <sys/syscall.h>
+-#endif
+ #include "extipl.h"
+ #include "sysident.h"
+ #include "extndipl.src"
+@@ -78,10 +75,6 @@
+ static void tblpack(struct partition_s *);
+ static char *ask(char *);
+ static int  sure(char *);
+-#ifdef __linux__
+-static int _llseek(uint, ulong, ulong, loff_t *, uint);
+-static int long_seek(int, off_t, int);
+-#endif
+ /*================ for DEBUG ======================== */
+ static void hexdump(char *, int);
+ static int  debug_out(char *, struct offset_s *, int);
+@@ -253,11 +246,7 @@
+ 	perror(device);
+ 	return(ERR);
+     }
+-#ifdef __linux__
+-    long_seek(fd, (off_t)offset->lba, SEEK_SET);
+-#else
+     lseek(fd, (off_t)offset->lba * SECTOR_SIZE, SEEK_SET);
+-#endif
+     if ((n = read(fd, buf, len)) != len) {
+ 	perror("rdipl");
+     }
+@@ -287,11 +276,7 @@
+ 	perror(device);
+ 	return(ERR);
+     }
+-#ifdef __linux__
+-    long_seek(fd, (off_t)offset->lba, SEEK_SET);
+-#else
+     lseek(fd, (off_t)offset->lba * (off_t)SECTOR_SIZE, SEEK_SET);
+-#endif
+     if ((r = write(fd, buf, len)) != len) {
+ 	perror("wripl");
+     }
+@@ -1103,46 +1088,6 @@
+     return(tolower(*ask((s == NULL) ? "... Sure(y/n)?" : s)) == 'y');
+ }
+ 
+-#ifdef __linux__
+-
+-static int _llseek(fd, hi, lo, res, whence)
+-uint fd, whence;
+-ulong hi, lo;
+-loff_t *res;
+-{
+-    return syscall(SYS__llseek, fd, hi, lo, res, whence);
+-}
+-
+-/* Hacked by Taketoshi Sano <xlj06203@nifty.ne.jp>  */
+-static int long_seek(fd, offset, whence)
+-int fd, whence;
+-off_t offset;
+-{
+-    loff_t loffset, result;
+-    unsigned long loff_hi, loff_lo;
+-
+-    loffset = (loff_t)offset << 9;
+-    loff_hi = (unsigned long)(loffset>>32);
+-    loff_lo = (unsigned long)(loffset & 0xffffffff);
+-    if (opt_debug) {
+-	fprintf(stderr, " sector: %lu, loffset: %Lu, loff_hi: %lu, loff_lo: %lu\n",
+-		offset, loffset, loff_hi, loff_lo);
+-	fflush(stderr);
+-    }
+-    if(_llseek(fd, loff_hi, loff_lo, &result, whence) != 0) {
+-	perror("llseek");
+-        return(ERR);
+-    }
+-    if (opt_debug) {
+-	loffset = (ul_long)result >> 9;
+-	fprintf(stderr, " result: %Lu, sector: %Lu\n", result, loffset);
+-	fflush(stderr);
+-    }
+-    return(OK);
+-}
+-#endif
+-
+-
+ /*=============================================================================
+  *		for DEBUG
+  *=============================================================================*/

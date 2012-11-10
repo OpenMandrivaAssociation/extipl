@@ -1,0 +1,20 @@
+--- extipl-5.04/src/castor.asm	2002-03-25 05:48:52.000000000 -0800
++++ extipl-5.04/src/castor.asm.new	2007-11-04 01:15:36.000000000 -0700
+@@ -2233,7 +2233,7 @@ tblcrc4:	pop	si
+ 		mov	cx,16		;; 8 + 8
+ 		pop	si
+ 		pop	di
+-		jmp	short crc32
++		jmp	short crc32x
+ 
+ labelbuf_crc:	mov	bx,label_buff
+ 		mov	cx,label_buffln
+@@ -2244,7 +2244,7 @@ CRCPOLY_H	equ	0xedb8
+ ;;	Enter:	cx = length
+ ;;		bx = buffer address
+ ;;	Return:	dx.ax = crc32
+-crc32:		push	si
++crc32x:		push	si
+ 		mov	si,bx
+ 		mov	bx,0xffff	; res.lo
+ 		mov	dx,bx		; res.hi

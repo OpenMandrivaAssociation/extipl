@@ -1,0 +1,12 @@
+--- extipl-5.03/src/extipl.8.in.pix	Wed Nov 29 12:58:00 2000
++++ extipl-5.03/src/extipl.8.in	Tue Feb  5 00:50:04 2002
+@@ -290,8 +290,7 @@
+ boot sector.
+ 
+ .SH "SEE ALSO"
+-The programs are documented fully at !!DOCDIR!!/extipl/English/extipl.txt
+-in English, or !!DOCDIR!!/extipl/Japanese/extipl.txt in Japanese.
++The programs are documented fully at /usr/share/extipl-*
+ .SH AUTHOR
+ The author of Extended-IPL is Takamiti Kimura <takamiti@tsden.org>,
+ English documentation is written by Ryutaroh Matsumoto <ryutaroh@tsden.org>
