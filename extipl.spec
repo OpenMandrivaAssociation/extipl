@@ -52,18 +52,18 @@ EOF
 %make -C src
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
-install src/%{name} -D %{buildroot}%{_sbindir}/%{name}
+install src/%{name} -D $RPM_BUILD_ROOT%{_sbindir}/%{name}
 
-install -d %{buildroot}%{_prefix}/lib/%{name}
-install -m 644 src/{pollux,castor,altair,aldebaran}.bin %{buildroot}%{_prefix}/lib/%{name}
+install -d $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
+install -m 644 src/{pollux,castor,altair,aldebaran}.bin $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
 
-install -D -m 644 src/extipl.8.in %{buildroot}%{_mandir}/man8/extipl.8
+install -D -m 644 src/extipl.8.in $RPM_BUILD_ROOT%{_mandir}/man8/extipl.8
 
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -71,4 +71,68 @@ rm -rf %{buildroot}
 %{_sbindir}/*
 %{_prefix}/lib/%{name}
 %{_mandir}/*/*
+
+
+
+%changelog
+* Tue May 03 2011 Oden Eriksson <oeriksson@mandriva.com> 5.04-17mdv2011.0
++ Revision: 664165
+- mass rebuild
+
+* Thu Dec 02 2010 Oden Eriksson <oeriksson@mandriva.com> 5.04-16mdv2011.0
++ Revision: 605114
+- rebuild
+
+* Wed Mar 17 2010 Oden Eriksson <oeriksson@mandriva.com> 5.04-15mdv2010.1
++ Revision: 522579
+- rebuilt for 2010.1
+
+* Fri Oct 09 2009 Olivier Blin <oblin@mandriva.com> 5.04-14mdv2010.0
++ Revision: 456407
+- move files from /usr/lib64/extipl to /usr/lib/extipl,
+  since they really are no x86_64 files
+  (mimic commit 60126 from pixel on syslinux)
+
+* Wed Sep 02 2009 Christophe Fergeau <cfergeau@mandriva.com> 5.04-13mdv2010.0
++ Revision: 424394
+- rebuild
+
+* Mon Mar 30 2009 Pascal Terjan <pterjan@mandriva.org> 5.04-12mdv2009.1
++ Revision: 362286
+- Enable build on x86_64 and add patch from debian bugtracker
+
+* Mon Mar 02 2009 Guillaume Rousse <guillomovitch@mandriva.org> 5.04-11mdv2009.1
++ Revision: 347460
+- rebuild
+
+* Tue Jun 17 2008 Thierry Vignaud <tv@mandriva.org> 5.04-10mdv2009.0
++ Revision: 220738
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Mon Nov 05 2007 Adam Williamson <awilliamson@mandriva.org> 5.04-9mdv2008.1
++ Revision: 106206
+- rebuild for lzma permission issue (#35309)
+
+* Sun Nov 04 2007 Adam Williamson <awilliamson@mandriva.org> 5.04-8mdv2008.1
++ Revision: 105672
+- add extipl-5.04-debian.patch (from debian) to fix C build errors
+- add extipl-5.04-syntax.patch to fix nasm syntax errors
+- rebuild for 2008
+- new license policy
+
+
+* Fri Jan 12 2007 Pixel <pixel@mandriva.com> 5.04-7mdv2007.0
++ Revision: 108022
+- use mkrel
+- Import extipl
+
+* Wed Oct 12 2005 Pixel <pixel@mandriva.com> 5.04-6mdk
+- rebuild
+
+* Sat Aug 14 2004 Pixel <pixel@mandrakesoft.com> 5.04-5mdk
+- rebuild
 
