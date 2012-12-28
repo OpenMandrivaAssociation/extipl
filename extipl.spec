@@ -1,17 +1,12 @@
-%define	name	extipl
-%define	version	5.04
-%define release	%mkrel 18
-
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		extipl
+Version:	5.04
+Release:	18
 URL:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
 Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
 License:	GPL+
 Group:		System/Kernel and hardware
 BuildRequires:	nasm
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 Exclusivearch:	%{ix86} x86_64
 Patch1:		extipl-5.03-fix-manpage.patch
 # Fix a nasm syntax error - 'crc32' is now a keyword in nasm
@@ -35,9 +30,9 @@ and then it will boot up the OS reside at the selected partition.
 %prep
 %setup -q
 %patch1 -p1
-%patch2 -p1 -b .syntax
-%patch3 -p1 -b .debian
-%patch4 -p1 -b .debian2
+%patch2 -p1 -b .syntax~
+%patch3 -p1 -b .debian~
+%patch4 -p1 -b .debian2~
 
 cat > uninstall_linux_or_grub.txt <<EOF
 If you want to remove Linux, you must be careful to replace LILO or GRUB with
@@ -52,30 +47,22 @@ EOF
 %make -C src
 
 %install
-rm -rf $RPM_BUILD_ROOT
+install src/%{name} -D %{buildroot}%{_sbindir}/%{name}
 
-install src/%{name} -D $RPM_BUILD_ROOT%{_sbindir}/%{name}
+install -d %{buildroot}%{_prefix}/lib/%{name}
+install -m644 src/{pollux,castor,altair,aldebaran}.bin %{buildroot}%{_prefix}/lib/%{name}
 
-install -d $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
-install -m 644 src/{pollux,castor,altair,aldebaran}.bin $RPM_BUILD_ROOT%{_prefix}/lib/%{name}
-
-install -D -m 644 src/extipl.8.in $RPM_BUILD_ROOT%{_mandir}/man8/extipl.8
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+install -m644 src/extipl.8.in -D %{buildroot}%{_mandir}/man8/extipl.8
 
 %files
-%defattr(-,root,root)
 %doc uninstall_linux_or_grub.txt doc/English/*
 %{_sbindir}/*
 %{_prefix}/lib/%{name}
 %{_mandir}/*/*
 
-
-
 %changelog
 * Fri Dec 28 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 5.04-18
+- cleanups
 - update url
 
 * Tue May 03 2011 Oden Eriksson <oeriksson@mandriva.com> 5.04-17mdv2011.0
