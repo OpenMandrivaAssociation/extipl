@@ -1,12 +1,12 @@
 %define	name	extipl
 %define	version	5.04
-%define release	%mkrel 17
+%define release	%mkrel 18
 
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-URL:		http://www.tsden.org/ryutaroh/extipl/extipl.html
+URL:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
 Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
 License:	GPL+
 Group:		System/Kernel and hardware
@@ -75,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Dec 28 2012 Per Øyvind Karlsen <peroyvind@mandriva.org> 5.04-18
+- update url
+
 * Tue May 03 2011 Oden Eriksson <oeriksson@mandriva.com> 5.04-17mdv2011.0
 + Revision: 664165
 - mass rebuild
