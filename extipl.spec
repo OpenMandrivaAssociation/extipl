@@ -2,12 +2,10 @@ Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		extipl
 Version:	5.04
 Release:	19
-URL:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
-Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
-License:	GPL+
+License:	GPLv2+
 Group:		System/Kernel and hardware
-BuildRequires:	nasm
-ExclusiveArch:	%{ix86} x86_64
+Url:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
+Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
 Patch1:		extipl-5.03-fix-manpage.patch
 # Fix a nasm syntax error - 'crc32' is now a keyword in nasm
 # - AdamW 2007/10
@@ -16,6 +14,8 @@ Patch2:		extipl-5.04-syntax.patch
 Patch3:		extipl-5.04-debian.patch
 # From Debian bug - fix build on x86_64
 Patch4:		extipl-5.04-debian2.patch
+ExclusiveArch:	%{ix86} x86_64
+BuildRequires:	nasm
 
 %description
 Extended-IPL is a boot selector which is upper compatible with 
@@ -29,10 +29,7 @@ and then it will boot up the OS reside at the selected partition.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1 -b .syntax~
-%patch3 -p1 -b .debian~
-%patch4 -p1 -b .debian2~
+%apply_patches
 
 cat > uninstall_linux_or_grub.txt <<EOF
 If you want to remove Linux, you must be careful to replace LILO or GRUB with
