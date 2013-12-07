@@ -1,7 +1,7 @@
 Summary:	Yet Another Boot Selector for IBM-PC compatibles
 Name:		extipl
 Version:	5.04
-Release:	20
+Release:	21
 License:	GPLv2+
 Group:		System/Kernel and hardware
 Url:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
