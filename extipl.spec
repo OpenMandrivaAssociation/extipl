@@ -29,7 +29,7 @@ and then it will boot up the OS reside at the selected partition.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 cat > uninstall_linux_or_grub.txt <<EOF
 If you want to remove Linux, you must be careful to replace LILO or GRUB with
