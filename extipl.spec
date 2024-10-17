@@ -4,7 +4,7 @@ Version:	5.04
 Release:	29
 License:	GPLv2+
 Group:		System/Kernel and hardware
-Url:		http://extipl.sourceforge.jp/htdoc-en/extipl.html
+Url:		https://extipl.sourceforge.jp/htdoc-en/extipl.html
 Source0:	http://www.tsden.org/takamiti/extipl/archs/%{name}-%{version}.tar.bz2
 Patch1:		extipl-5.03-fix-manpage.patch
 # Fix a nasm syntax error - 'crc32' is now a keyword in nasm
