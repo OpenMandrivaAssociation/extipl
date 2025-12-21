@@ -15,6 +15,7 @@ Patch3:		extipl-5.04-debian.patch
 # From Debian bug - fix build on x86_64
 Patch4:		extipl-5.04-debian2.patch
 ExclusiveArch:	%{ix86} x86_64
+BuildRequires:	make
 BuildRequires:	nasm
 
 %description
